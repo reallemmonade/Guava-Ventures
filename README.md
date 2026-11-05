@@ -1,6 +1,6 @@
 # guava.ventures
 
-The Guava Ventures website: a static site served by Cloudflare Pages. There is no build step; every file here is published as is.
+The Guava Ventures website: a static site served by Cloudflare Workers (static assets). There is no build step; `wrangler.jsonc` tells Cloudflare to publish this folder as is, and `.assetsignore` keeps repo files like this README off the site.
 
 - `index.html`: the homepage
 - `privacy/`, `terms/`, `support/`: policy and help pages (drafts; fill in the [BRACKETS])
