@@ -2,7 +2,7 @@
 
 The Guava Ventures website: a static site served by Cloudflare Workers (static assets). There is no build step; `wrangler.jsonc` tells Cloudflare to publish this folder as is, and `.assetsignore` keeps repo files like this README off the site.
 
-- `index.html`: the homepage (hero, the five products at a glance, one story per product, how we build, contact)
+- `index.html`: the homepage (hero, the six products at a glance, one story per product, how we build, contact)
 - `privacy/`, `terms/`, `support/`: policy and help pages (drafts; fill in the remaining [BRACKETS])
 - `404.html`: shown for unknown addresses
 - `assets/guava-sky.js`: the Guava theme engine from the brand kit. **Copy it unchanged**; it drives the living sky, the 7 looks, the fonts and glass.

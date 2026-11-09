@@ -1,8 +1,8 @@
-// guava.ventures: starts the Guava sky (assets/guava-sky.js, unchanged from the brand kit) and builds the Appearance sheet.
-import { startGuavaSky, playDay, guavaSky, LOOKS, FONTS, CITIES, sunTimes, fmtHour, deviceTz } from "./guava-sky.js";
+// guava.ventures: runs the two styles (Guava sky from assets/guava-sky.js, unchanged from the brand kit, and Normal) and builds the Appearance sheet.
+import { GUAVA_CSS, applyGuavaSky, playDay, guavaSky, reach, LOOKS, FONTS, CITIES, sunTimes, fmtHour, deviceTz } from "./guava-sky.js";
 
 const KEY = "guava-theme", VARS_KEY = "guava-sky-vars";
-const DEFAULTS = { look: "guava", font: "clean", city: null, cycle: true, freeze: 12, sunSpot: "glow" };
+const DEFAULTS = { style: "guava", mode: "system", look: "guava", font: "clean", city: null, cycle: true, freeze: 12, sunSpot: "glow" };
 const store = {
   get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
   set(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
@@ -13,9 +13,53 @@ let preview = null;
 const settings = () => preview == null ? saved : Object.assign({}, saved, { at: preview });
 
 const root = document.documentElement;
-const sky = startGuavaSky(root, settings);
-const cache = s => store.set(VARS_KEY, JSON.stringify({ v: s.vars, t: s.scheme }));
-cache(sky.refresh());
+// Normal style: one quiet solid ground (warm ivory or charcoal). The sky never writes variables in it.
+const NORMAL = {
+  light: { "--ground": "#FAF9F5", "--panel": "#FFFFFF", "--ink": "#141413", "--ink-soft": "#5E5D59", "--ink-faint": "#87867F", "--rule": "#E8E6DC", "--rule-strong": "#D1CFC5", "--hero-bg": "#F0EEE6", "--hero-on": "#141413" },
+  dark: { "--ground": "#1F1E1D", "--panel": "#262624", "--ink": "#FAF9F5", "--ink-soft": "#C2C0B6", "--ink-faint": "#9C9A92", "--rule": "#3A3936", "--rule-strong": "#4A4844", "--hero-bg": "#30302E", "--hero-on": "#FAF9F5" }
+};
+const systemDark = matchMedia("(prefers-color-scheme: dark)");
+const normalScheme = () => saved.mode === "dark" || (saved.mode !== "light" && systemDark.matches) ? "dark" : "light";
+function normalState() {
+  const scheme = normalScheme(), n = NORMAL[scheme];
+  const base = guavaSky({ look: "guava", font: saved.font, cycle: false, freeze: scheme === "light" ? 13 : 0 });
+  const v = Object.assign({}, base.vars, n, { "--panel-glass": n["--panel"], "--sun-o": "0" });
+  ["--art1", "--art2", "--art3", "--art4", "--g1", "--g2", "--g3"].forEach(k => { v[k] = n["--ground"]; });
+  const fit = (k, ratio) => { if (/^#[0-9a-f]{6}$/i.test(v[k] || "")) v[k] = reach(reach(v[k], n["--ground"], ratio), n["--panel"], ratio); };
+  ["--accent", "--good", "--signal", "--bad"].forEach(k => fit(k, 4.5));
+  for (let i = 1; i <= 9; i++) fit("--c" + i, 3);
+  for (let i = 1; i <= 8; i++) fit("--cx" + i, 3);
+  return { style: "normal", scheme, font: base.font, vars: v };
+}
+function applyNormal() {
+  const s = normalState();
+  Object.keys(s.vars).forEach(k => root.style.setProperty(k, s.vars[k]));
+  root.dataset.theme = s.scheme; root.dataset.sun = "off"; root.style.colorScheme = s.scheme;
+  document.querySelectorAll('meta[name="theme-color"]').forEach(m => m.setAttribute("content", s.vars["--ground"]));
+  let link = document.getElementById("guava-font");
+  const href = "https://fonts.googleapis.com/css2?" + FONTS[s.font].google + "&display=swap";
+  if (!link) { link = document.createElement("link"); link.id = "guava-font"; link.rel = "stylesheet"; document.head.appendChild(link); }
+  if (link.getAttribute("href") !== href) link.setAttribute("href", href);
+  return s;
+}
+// Applies the saved style; the sky only runs in Guava style.
+function refresh() {
+  const normal = saved.style === "normal";
+  root.dataset.style = normal ? "normal" : "guava";
+  const s = normal ? applyNormal() : applyGuavaSky(root, settings());
+  store.set(VARS_KEY, JSON.stringify({ v: s.vars, t: s.scheme, s: root.dataset.style }));
+  return s;
+}
+if (!document.getElementById("guava-sky-css")) {
+  const st = document.createElement("style"); st.id = "guava-sky-css"; st.textContent = GUAVA_CSS; document.head.appendChild(st);
+}
+let backdrop = document.getElementById("backdrop");
+if (!backdrop) { backdrop = document.createElement("div"); backdrop.id = "backdrop"; backdrop.setAttribute("aria-hidden", "true"); document.body.prepend(backdrop); }
+if (!backdrop.querySelector(".sun")) { const i = document.createElement("i"); i.className = "sun"; backdrop.appendChild(i); }
+refresh();
+setInterval(() => { if (saved.style !== "normal") refresh(); }, 5 * 60000);
+document.addEventListener("visibilitychange", () => { if (!document.hidden) refresh(); });
+systemDark.addEventListener("change", () => { if (saved.style === "normal" && saved.mode === "system") refresh(); });
 
 // Numbers and labels use DM Mono; the brand face (Plus Jakarta Sans) and the chosen one are loaded by the engine.
 if (!document.getElementById("site-mono")) {
@@ -66,16 +110,22 @@ function buildAppearance(button) {
       <button class="icon-btn" type="button" data-close aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
     <div class="sheet-body">
       <div class="preview">${phoneHTML()}</div>
-      <section><h3>Look</h3><div class="looks" data-looks></div></section>
+      <div class="style-cell" role="radiogroup" aria-label="Style">
+        <button type="button" role="radio" data-style="guava"><span class="mini mini-sky"></span>Guava</button>
+        <button type="button" role="radio" data-style="normal"><span class="mini mini-normal"></span>Normal</button>
+      </div>
+      <section data-only="guava"><h3>Look</h3><div class="looks" data-looks></div></section>
+      <section data-only="normal"><div class="seg" role="radiogroup" aria-label="Light or dark">
+        <button type="button" role="radio" data-mode="light">Light</button><button type="button" role="radio" data-mode="dark">Dark</button><button type="button" role="radio" data-mode="system">System</button></div></section>
       <section><h3>Text</h3><div class="fonts" data-fonts></div></section>
-      <div class="card set-row"><span class="k" id="cyc-l">Change through the day</span><button class="switch" type="button" role="switch" data-cycle aria-labelledby="cyc-l"></button></div>
-      <div class="card timeline">
+      <div class="card set-row" data-only="guava"><span class="k" id="cyc-l">Change through the day</span><button class="switch" type="button" role="switch" data-cycle aria-labelledby="cyc-l"></button></div>
+      <div class="card timeline" data-only="guava">
         <div class="top"><span data-tl-label>Preview a time</span><b data-tl-val></b></div>
         <input type="range" min="0" max="23.75" step="0.25" data-hour aria-label="Time of day">
         <div class="marks"><span>12am</span><span>6am</span><span>Noon</span><span>6pm</span><span>12am</span></div>
         <div class="foot"><button class="btn btn-glass btn-sm" type="button" data-play>Play the day</button></div>
       </div>
-      <div class="card" style="padding:0">
+      <div class="card" style="padding:0" data-only="guava">
         <div class="set-row"><div><div class="k">City</div><div class="v" data-city-v></div></div><button class="btn btn-glass btn-sm" type="button" data-city-btn aria-expanded="false">Change</button></div>
         <div class="city-list" data-city-list>
           <div class="chips"><button type="button" data-loc>Use my location</button><button type="button" data-tz>Use my time zone</button></div>
@@ -107,9 +157,15 @@ function buildAppearance(button) {
 
   let lastMoment = null, back = 0, cancelPlay = null;
   function show() {
-    const s = sky.refresh(); cache(s);
-    looksEl.querySelectorAll(".opt").forEach(b => { b.setAttribute("aria-pressed", String(b.dataset.look === saved.look)); b.querySelector(".sw").style.background = swatch(b.dataset.look, s.localHour); });
+    const normal = saved.style === "normal";
+    sheet.querySelectorAll("[data-style]").forEach(b => b.setAttribute("aria-checked", String(b.dataset.style === (normal ? "normal" : "guava"))));
+    sheet.querySelectorAll("[data-mode]").forEach(b => b.setAttribute("aria-checked", String(b.dataset.mode === saved.mode)));
+    sheet.querySelectorAll("[data-only]").forEach(el => { el.hidden = el.dataset.only !== (normal ? "normal" : "guava"); });
+    sheet.querySelector(".mini-sky").style.background = swatch(saved.look, guavaSky(saved).localHour);
     fontsEl.querySelectorAll(".opt").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.font === saved.font)));
+    if (normal) { refresh(); document.querySelectorAll("[data-clock]").forEach(c => { c.textContent = fmtHour(new Date().getHours() + new Date().getMinutes() / 60); }); return null; }
+    const s = refresh();
+    looksEl.querySelectorAll(".opt").forEach(b => { b.setAttribute("aria-pressed", String(b.dataset.look === saved.look)); b.querySelector(".sw").style.background = swatch(b.dataset.look, s.localHour); });
     $("[data-cycle]").setAttribute("aria-checked", String(saved.cycle));
     $("[data-tl-label]").textContent = saved.cycle ? "Preview a time" : "Stick to";
     $("[data-tl-val]").textContent = fmtHour(s.localHour) + " · " + s.palette;
@@ -122,6 +178,8 @@ function buildAppearance(button) {
   }
   function save(patch) { saved = Object.assign({}, saved, patch); store.set(KEY, JSON.stringify(saved)); show(); }
 
+  sheet.querySelectorAll("[data-style]").forEach(b => { b.onclick = () => { preview = null; save({ style: b.dataset.style }); }; });
+  sheet.querySelectorAll("[data-mode]").forEach(b => { b.onclick = () => save({ mode: b.dataset.mode }); });
   $("[data-cycle]").onclick = () => { preview = null; save({ cycle: !saved.cycle }); };
   hour.oninput = () => {
     clearTimeout(back); preview = +hour.value; const s = show();
@@ -185,4 +243,5 @@ function buildAppearance(button) {
   scrim.onclick = close; $("[data-close]").onclick = close;
   addEventListener("keydown", e => { if (e.key !== "Escape") return; if (cancelPlay) stopPlay(); else if (sheet.classList.contains("open")) close(); });
   setInterval(() => { if (sheet.classList.contains("open") && preview == null && !cancelPlay) show(); }, 60000);
+  systemDark.addEventListener("change", () => { if (sheet.classList.contains("open")) show(); });
 }

@@ -82,8 +82,7 @@ h1, h2, h3 { font-family: var(--f-display); margin: 0; color: var(--ink); }
 
 /* At a glance: one glass card per product. */
 .glance { padding-bottom: clamp(56px, 9vh, 96px); }
-.glance-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; margin: 0; padding: 0; list-style: none; }
-@media (max-width: 1040px) { .glance-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.glance-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin: 0; padding: 0; list-style: none; }
 @media (max-width: 680px) { .glance-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 420px) { .glance-grid { grid-template-columns: 1fr; } }
 .glance-card { display: flex; flex-direction: column; gap: 10px; height: 100%; padding: 18px; color: var(--ink); text-decoration: none; transition: transform .2s ease, border-color .2s ease; }
@@ -277,3 +276,22 @@ h1, h2, h3 { font-family: var(--f-display); margin: 0; color: var(--ink); }
   .reveal { opacity: 1; transform: none; transition: none; }
   .sheet, .switch::after, .glance-card, .btn { transition: none; }
 }
+
+/* Style switch (Guava | Normal) and the Light · Dark · System control. */
+.style-cell { display: grid; grid-template-columns: 1fr 1fr; padding: 4px; gap: 4px; border-radius: 16px; background: var(--panel-glass); border: 1px solid var(--rule); }
+.style-cell button, .seg button { font: inherit; font-weight: 700; font-size: 14px; color: var(--ink); background: none; border: 0; border-radius: 12px; cursor: pointer; }
+.style-cell button { display: flex; align-items: center; justify-content: center; gap: 8px; padding: 11px 8px; }
+.style-cell button[aria-checked="true"], .seg button[aria-checked="true"] { background: var(--accent-fill); color: var(--on-accent); }
+.mini { width: 18px; height: 18px; border-radius: 6px; flex: none; border: 1px solid rgba(0,0,0,.12); }
+.mini-normal { background: linear-gradient(135deg, #FAF9F5 50%, #1F1E1D 50%); }
+.seg { display: grid; grid-template-columns: repeat(3, 1fr); padding: 4px; gap: 4px; border-radius: 14px; background: var(--panel-glass); border: 1px solid var(--rule); }
+.seg button { padding: 9px 6px; }
+[data-only][hidden] { display: none !important; }
+
+/* Normal style: one solid ground, solid panels, no sky, sun or blur. */
+:root[data-style="normal"] #backdrop { display: none; }
+:root[data-style="normal"] body { background: var(--ground); }
+:root[data-style="normal"] *, :root[data-style="normal"] *::before { -webkit-backdrop-filter: none !important; backdrop-filter: none !important; }
+:root[data-style="normal"] .card { border-color: var(--rule); }
+:root[data-style="normal"] .phone-screen { background: var(--ground); }
+:root[data-style="normal"] .hero-card { border: 1px solid var(--rule); }
