@@ -295,3 +295,6 @@ h1, h2, h3 { font-family: var(--f-display); margin: 0; color: var(--ink); }
 :root[data-style="normal"] .card { border-color: var(--rule); }
 :root[data-style="normal"] .phone-screen { background: var(--ground); }
 :root[data-style="normal"] .hero-card { border: 1px solid var(--rule); }
+
+.side { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 14px; margin-top: 12px; padding: 18px 22px; }
+.side p { margin: 0; flex: 1 1 320px; color: var(--ink-soft); font-size: 15.5px; }
