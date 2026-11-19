@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Guava Ventures</title>
-<meta name="description" content="Guava Ventures is a San Francisco product studio building guava.u, Guava Poker, Merqado, Offerday, guava.zip and agent-index.">
+<meta name="description" content="Guava Ventures is a San Francisco product studio building guava.u, Guava Poker, Merqado, Offerday, guava.zip, agent-index, Celaya and QR-Tracker.">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -12,7 +12,7 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://guava.ventures/">
 <meta property="og:title" content="Guava Ventures">
-<meta property="og:description" content="A San Francisco product studio building guava.u, Guava Poker, Merqado, Offerday, guava.zip and agent-index.">
+<meta property="og:description" content="A San Francisco product studio building guava.u, Guava Poker, Merqado, Offerday, guava.zip, agent-index, Celaya and QR-Tracker.">
 <meta property="og:image" content="https://guava.ventures/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -37,6 +37,8 @@
 <a class="p" href="#offerday">Offerday</a>
 <a class="p" href="#zip">guava.zip</a>
 <a class="p" href="#agents">agent-index</a>
+<a class="p" href="#celaya">Celaya</a>
+<a class="p" href="#qr">QR-Tracker</a>
 <button class="icon-btn" type="button" id="appearance-btn" aria-label="Appearance" aria-expanded="false" style="margin-left:8px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg></button>
 </div>
 </nav>
@@ -46,10 +48,10 @@
 
 <section class="hero wrap-x">
 <p class="eyebrow">Guava Ventures <b>·</b> San Francisco</p>
-<h1 class="display">Small team. Six bets on better software<span class="dot">.</span></h1>
-<p class="lead">A product studio building for your life and your career: a personal app, poker training, consulting software, interview prep, a better Finder, and a web index for AI agents.</p>
+<h1 class="display">Small team. Eight bets on better software<span class="dot">.</span></h1>
+<p class="lead">A product studio building for your life and your career: a personal app, poker training, consulting software, interview prep, a better Finder, AI tools and flyer marketing.</p>
 <div class="hero-ctas">
-<a class="btn btn-primary" href="#products">See the six</a>
+<a class="btn btn-primary" href="#products">See the eight</a>
 <a class="btn btn-glass" href="mailto:hello@guava.ventures">hello@guava.ventures</a>
 </div>
 </section>
@@ -61,7 +63,9 @@
 <li><a class="card glance-card reveal" href="#merqado"><span class="num">03 · B2B</span><span class="name">Merqado</span><span class="what">The engagement workspace for consulting teams.</span><span class="chip"><i></i>Prototype</span></a></li>
 <li><a class="card glance-card reveal" href="#offerday"><span class="num">04 · Careers</span><span class="name">Offerday</span><span class="what">LBO cases, drills and grading for PE and banking interviews.</span><span class="chip"><i></i>Beta</span></a></li>
 <li><a class="card glance-card reveal" href="#zip"><span class="num">05 · Mac + iPhone</span><span class="name">guava.zip</span><span class="what">A better Finder for Mac, and photo cleanup for iPhone.</span><span class="chip"><i></i>Mac beta</span></a></li>
-<li><a class="card glance-card reveal" href="#agents"><span class="num">06 · AI infrastructure</span><span class="name">agent-index</span><span class="what">A web index and fetch cache built for AI agents.</span><span class="chip"><i></i>Prototype</span></a></li>
+<li><a class="card glance-card reveal" href="#agents"><span class="num">06 · AI infrastructure</span><span class="name">agent-index</span><span class="what">A web index and fetch cache built for AI agents.</span><span class="chip live"><i></i>Live</span></a></li>
+<li><a class="card glance-card reveal" href="#celaya"><span class="num">07 · Mac + iPhone</span><span class="name">Celaya</span><span class="what">A private AI assistant that runs on your own Mac.</span><span class="chip"><i></i>In daily use</span></a></li>
+<li><a class="card glance-card reveal" href="#qr"><span class="num">08 · Marketing</span><span class="name">QR-Tracker</span><span class="what">A unique QR code on every flyer, tracked to signup.</span><span class="chip"><i></i>Prototype</span></a></li>
 </ul>
 </section>
 
@@ -240,16 +244,16 @@
 <section class="product wrap-x" id="agents">
 <div class="story flip card reveal">
 <div class="copy">
-<p class="eyebrow">06 · AI infrastructure · <b>Prototype</b></p>
+<p class="eyebrow">06 · AI infrastructure · <b>Live</b></p>
 <h2 class="h1">agent-index</h2>
 <p class="lead">A web index and fetch cache built for AI agents. It turns pages built for eyes into clean, cited Markdown, shares one cache across every agent, and serves it all as MCP tools.</p>
 <ul>
 <li><b>Fewer tokens:</b> main content only, about 95% smaller than the raw page</li>
 <li><b>One cache:</b> agents stop fetching the same page twice, and a repeat read returns only what changed</li>
 <li><b>Search first:</b> keyword and vector search over everything already read, before any fetch</li>
-<li><b>Runs anywhere:</b> one machine, one SQLite file, nothing to stand up</li>
+<li><b>Live at guavaindex.com:</b> every page served as HTML to people and Markdown to agents, with search and MCP over HTTP</li>
 </ul>
-<div class="row"><a class="btn btn-glass" href="mailto:hello@guava.ventures?subject=agent-index">Ask about agent-index</a><span class="meta">Fixes 10 of 29 agent frictions on its own</span></div>
+<div class="row"><a class="btn btn-primary" href="https://guavaindex.com">Open guavaindex.com</a><span class="meta">Fixes 10 of 29 agent frictions on its own</span></div>
 </div>
 <div class="visual">
 <div class="screen" role="img" aria-label="agent-index cleaning a page for an agent">
@@ -268,18 +272,89 @@
 </div>
 </section>
 
+<!-- 07 Celaya -->
+<section class="product wrap-x" id="celaya">
+<div class="story card reveal">
+<div class="copy">
+<p class="eyebrow">07 · Mac + iPhone · <b>In daily use</b></p>
+<h2 class="h1">Celaya</h2>
+<p class="lead">A private AI assistant that runs on your own Mac. Open Qwen models run locally through Ollama, so chats, files and memory stay on the machine, and your phone reaches it from anywhere.</p>
+<ul>
+<li><b>Familiar chat:</b> projects, artifacts, memory, attachments, voice and web search</li>
+<li><b>Gets things done:</b> files and commands on the Mac, Chrome control and scheduled tasks, each behind an approval</li>
+<li><b>Cloud when you want it:</b> move a chat to Claude, ChatGPT or a rented GPU</li>
+<li><b>Everywhere:</b> a native Mac app, the iPhone, and celaya.ai over a private tunnel</li>
+</ul>
+<div class="row"><span class="meta">Qwen 3.5 · Ollama · one SQLite file</span></div>
+</div>
+<div class="visual">
+<div class="screen" role="img" aria-label="Celaya filing receipts on a Mac">
+<div class="screen-bar"><i></i><i></i><i></i><span>Celaya</span></div>
+<div class="screen-body">
+<div style="display:flex;align-items:center;gap:10px"><img src="/assets/products/celaya-icon.png" alt="" width="36" height="36" style="border-radius:9px"><span class="h3">New chat</span></div>
+<div class="ask">Read the PDFs in Downloads and file the receipts.</div>
+<div class="line"><span>Read 6 PDFs</span><span class="v">on this Mac</span></div>
+<div class="line"><span>Move 4 receipts to Documents/Receipts</span><span class="v">approved</span></div>
+<div class="line"><span>Remind me monthly</span><span class="v">scheduled</span></div>
+<div class="line"><span>Model</span><span class="v">qwen3.5:9b · local</span></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- 08 QR-Tracker -->
+<section class="product wrap-x" id="qr">
+<div class="story flip card reveal">
+<div class="copy">
+<p class="eyebrow">08 · Marketing · <b>Prototype</b></p>
+<h2 class="h1">QR-Tracker</h2>
+<p class="lead">Flyer campaigns you can measure. Every flyer gets its own QR code, so each scan is tied to the design and the place it was posted, and one campaign tests both at once.</p>
+<ul>
+<li><b>Locations × designs:</b> each pairing gets its own short link and code</li>
+<li><b>Whole funnel:</b> scans through download or signup, reported by pixel, beacon or API</li>
+<li><b>Dashboard:</b> unique scanners, conversion, cost per signup and top cities</li>
+<li><b>Print-ready:</b> place the code on your flyer and export one PDF page per location</li>
+<li><b>Private:</b> no IP addresses stored, city-level location only</li>
+</ul>
+<div class="row"><span class="meta">Teams, invite links and an API</span></div>
+</div>
+<div class="visual">
+<div class="screen" role="img" aria-label="QR-Tracker matrix of scans by location and flyer design">
+<div class="screen-bar"><i></i><i></i><i></i><span>QR-Tracker · Spring launch</span></div>
+<div class="screen-body">
+<div class="matrix">
+<span></span><span class="meta">Design A</span><span class="meta">Design B</span><span class="meta">Total</span>
+<span>Campus café</span><span class="v">148</span><span class="v">96</span><b>244</b>
+<span>Gym</span><span class="v">61</span><span class="v">83</span><b>144</b>
+<span>Library</span><span class="v">112</span><span class="v">47</span><b>159</b>
+<b>Total</b><b>321</b><b>226</b><b>547</b>
+</div>
+<div class="line"><span>Signups · 9.3%</span><span class="v">51</span></div>
+<div class="meter" aria-hidden="true"><i style="width:9.3%"></i></div>
+<div class="line"><span>Cost per signup</span><span class="v">$2.35</span></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+
 
 <section class="studio wrap-x" aria-labelledby="studio-h">
 <div class="reveal" style="display:grid;gap:14px;max-width:720px">
 <p class="eyebrow">How we build</p>
-<h2 class="h2" id="studio-h">One studio, one look, six products that can each stand alone<span class="dot">.</span></h2>
+<h2 class="h2" id="studio-h">One studio, one look, eight products that can each stand alone<span class="dot">.</span></h2>
 </div>
 <div class="studio-grid">
 <div class="card reveal"><span class="h3">Shared foundation</span><p>One appearance system and shared building blocks across every product, so each new bet starts further ahead.</p></div>
 <div class="card reveal"><span class="h3">Private by default</span><p>Bank data is read-only, Mac files stay on the Mac, client files stay in the client's cloud, and nothing is sold.</p></div>
 <div class="card reveal"><span class="h3">Built to spin out</span><p>Each product has its own code, brand and users, so any one can grow, raise or sell on its own.</p></div>
 </div>
-<div class="card side reveal"><span class="eyebrow">Side project</span><span class="h3">Werdz</span><p>Unlimited word guessing at 5, 6 or 7 letters, with every word's difficulty rated by simulated players.</p></div>
+<div class="sides">
+<div class="card side reveal"><span class="eyebrow">Side project</span><span class="h3">Werdz</span><p>Unlimited word guessing at 5, 6 or 7 letters plus a Daily Werdz, with every word's difficulty rated by simulated players.</p></div>
+<div class="card side reveal"><span class="eyebrow">Side project</span><span class="h3">slowed + reverb</span><p>Slow down a song you own, add reverb and save an MP3, all in the browser.</p></div>
+</div>
 </section>
 
 <section class="contact wrap-x" aria-labelledby="contact-h">
