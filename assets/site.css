@@ -50,7 +50,7 @@ body.scrolled .site-head::before { opacity: 1; }
   -webkit-backdrop-filter: blur(16px) saturate(1.3); backdrop-filter: blur(16px) saturate(1.3); }
 .icon-btn:hover { border-color: var(--accent); }
 .icon-btn svg { width: 20px; height: 20px; }
-@media (max-width: 860px) { .nav-links a.p { display: none; } }
+@media (max-width: 1240px) { .nav-links a.p { display: none; } }
 
 /* Buttons: pills. */
 .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 13px 24px; border-radius: 999px; border: 0; cursor: pointer;
@@ -82,7 +82,8 @@ h1, h2, h3 { font-family: var(--f-display); margin: 0; color: var(--ink); }
 
 /* At a glance: one glass card per product. */
 .glance { padding-bottom: clamp(56px, 9vh, 96px); }
-.glance-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin: 0; padding: 0; list-style: none; }
+.glance-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin: 0; padding: 0; list-style: none; }
+@media (max-width: 1040px) { .glance-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 680px) { .glance-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 420px) { .glance-grid { grid-template-columns: 1fr; } }
 .glance-card { display: flex; flex-direction: column; gap: 10px; height: 100%; padding: 18px; color: var(--ink); text-decoration: none; transition: transform .2s ease, border-color .2s ease; }
@@ -298,3 +299,12 @@ h1, h2, h3 { font-family: var(--f-display); margin: 0; color: var(--ink); }
 
 .side { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 14px; margin-top: 12px; padding: 18px 22px; }
 .side p { margin: 0; flex: 1 1 320px; color: var(--ink-soft); font-size: 15.5px; }
+
+.sides { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 12px; }
+.sides .side { margin-top: 0; flex-direction: column; align-items: flex-start; gap: 6px; }
+.sides .side p { flex: none; }
+@media (max-width: 760px) { .sides { grid-template-columns: 1fr; } }
+.matrix { display: grid; grid-template-columns: 1.4fr repeat(3, 1fr); gap: 1px; border-radius: 12px; overflow: hidden; background: var(--rule); font-size: 14px; }
+.matrix > * { background: var(--panel); padding: 9px 10px; }
+.matrix .v, .matrix b { font-family: "DM Mono", ui-monospace, monospace; text-align: right; }
+.matrix .meta { text-align: right; }
