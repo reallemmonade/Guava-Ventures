@@ -98,30 +98,29 @@ h1, h2, h3 { font-family: var(--f-display); margin: 0; color: var(--ink); }
 .bento-name span { font-size: 14.5px; color: var(--ink-soft); line-height: 1.4; }
 .b-u .bento-name b { font-size: clamp(26px, 3vw, 36px); }
 .b-u .bento-name span { font-size: 17px; }
-.bv { display: grid; gap: 8px; min-width: 0; }
-.bv-u { max-width: 400px; }
-.bv-u .hero-card { display: grid; gap: 4px; border-radius: 20px; padding: 20px; background: var(--hero-bg); color: var(--hero-on); }
-.bv-u .k { font-size: 11px; text-transform: uppercase; letter-spacing: .06em; opacity: .85; }
-.bv-u .big { font-family: var(--f-display); font-weight: 800; font-size: clamp(34px, 4vw, 44px); letter-spacing: -.03em; line-height: 1.1; }
-.bv-u .pb { height: 7px; border-radius: 999px; background: rgba(255,255,255,.4); overflow: hidden; margin-top: 6px; }
-.bv-u .pb i { display: block; height: 100%; background: currentColor; border-radius: 999px; }
-.bv-u .glassrow { display: flex; justify-content: space-between; gap: 10px; padding: 10px 14px; border-radius: 14px; background: var(--panel-glass); font-size: 14.5px; font-weight: 600;
-  border: 1px solid color-mix(in srgb, var(--rule) 60%, transparent); }
-.bv-u .glassrow .mono { font-weight: 400; color: var(--ink-soft); }
-.b-poker .bento-tile { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 236px); grid-template-rows: auto 1fr; column-gap: 24px; }
+.bento-letter { width: 100%; height: 100%; display: grid; place-items: center; background: var(--c6-fill); color: var(--c6-on); }
+.bv-shot { display: block; position: relative; border-radius: 14px; overflow: hidden; border: 1px solid color-mix(in srgb, var(--rule) 70%, transparent); background: var(--panel);
+  box-shadow: 0 14px 28px -20px rgba(0,0,0,.55); }
+.bv-shot img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: top left; }
+.bv-shot.desk { aspect-ratio: 16 / 9; }
+.bv-shot.phone { aspect-ratio: 3 / 4; max-width: 220px; }
+.b-u .bv-shot.phone { max-width: 260px; aspect-ratio: 4 / 5; }
+.b-zip .bv-shot.phone, .b-offer .bv-shot, .b-celaya .bv-shot { max-height: 120px; aspect-ratio: auto; height: 120px; }
+.b-zip .bv-shot.phone { max-width: none; }
+.b-agents .bv-shot { height: 120px; aspect-ratio: auto; }
+.b-poker .bento-tile { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 300px); grid-template-rows: auto 1fr; column-gap: 24px; }
 .b-poker .bento-top { grid-column: 1; }
 .b-poker .bento-name { grid-column: 1; grid-row: 2; align-self: end; }
-.bv-poker { grid-column: 2; grid-row: 1 / span 2; align-self: center; }
-.bv-poker .pcard { width: 52px; height: 72px; }
-.bv-poker .split { display: flex; justify-content: space-between; margin: 0; font-size: 12px; }
+.b-poker .bv-shot { grid-column: 2; grid-row: 1 / span 2; align-self: center; }
 @media (max-width: 560px) { .b-poker .bento-tile { display: flex; } }
-.bento-tile .ask { font-size: 13.5px; }
-.bv-grade { font-size: 13px; color: var(--ink-soft); gap: 4px; }
-.bv-grade .ok { color: var(--good); } .bv-grade .no { color: var(--bad); }
-.bv-row { display: flex; justify-content: space-between; gap: 8px; font-size: 13px; color: var(--ink-soft); padding: 8px 12px; border-radius: 12px; background: var(--panel-glass);
-  border: 1px solid color-mix(in srgb, var(--rule) 60%, transparent); font-variant-numeric: tabular-nums; }
-.bv-bars { display: flex; align-items: flex-end; gap: 6px; height: 40px; }
-.bv-bars i { flex: 1; border-radius: 6px 6px 2px 2px; background: var(--c4-fill); opacity: .9; }
+/* Story screenshots. */
+.shot { margin: 0; border-radius: 18px; overflow: hidden; border: 1px solid color-mix(in srgb, var(--rule) 70%, transparent); background: var(--panel); box-shadow: var(--shadow-card); }
+.shot img { display: block; width: 100%; height: auto; }
+.shot.phone { max-width: 300px; margin: 0 auto; }
+.visual.shots-2 { display: grid; grid-template-columns: minmax(0, 1fr); gap: 14px; width: 100%; }
+.shot-icon { display: grid; place-items: center; padding: 24px; }
+.shot-icon img { width: 160px; max-width: 50vw; height: auto; border-radius: 22%; box-shadow: var(--shadow-card); }
+.side-ic img { display: block; border-radius: 9px; }
 .chip { display: inline-flex; align-items: center; gap: 6px; align-self: flex-start; padding: 4px 10px; border-radius: 999px; font-family: var(--f-mono); font-size: 11.5px;
   letter-spacing: .06em; text-transform: uppercase; background: var(--accent-soft); color: var(--accent); }
 .chip i { width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
