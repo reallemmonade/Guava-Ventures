@@ -75,22 +75,52 @@ h1, h2, h3 { font-family: var(--f-display); margin: 0; color: var(--ink); }
 .dot { color: var(--accent); }
 
 /* Hero. */
-.hero { padding-top: clamp(56px, 11vh, 120px); padding-bottom: clamp(56px, 10vh, 112px); display: grid; gap: 28px; justify-items: center; text-align: center; }
-.hero .display { max-width: 15ch; }
-.hero .lead { max-width: 46ch; }
-.hero-ctas { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
+.hero { padding-top: clamp(40px, 8vh, 96px); padding-bottom: clamp(28px, 4vh, 40px); display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 24px 40px; }
+.hero .display { max-width: 13ch; font-size: clamp(44px, 6.4vw, 76px); }
+.hero-ctas { display: flex; flex-wrap: wrap; gap: 12px; }
 
-/* At a glance: one glass card per product. */
-.glance { padding-bottom: clamp(56px, 9vh, 96px); }
-.glance-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin: 0; padding: 0; list-style: none; }
-@media (max-width: 1040px) { .glance-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-@media (max-width: 680px) { .glance-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-@media (max-width: 420px) { .glance-grid { grid-template-columns: 1fr; } }
-.glance-card { display: flex; flex-direction: column; gap: 10px; height: 100%; padding: 18px; color: var(--ink); text-decoration: none; transition: transform .2s ease, border-color .2s ease; }
-.glance-card:hover { color: var(--ink); transform: translateY(-2px); border-color: var(--accent-line); }
-.glance-card .num { font-family: var(--f-mono); font-size: 12px; color: var(--ink-faint); }
-.glance-card .name { font-weight: 800; font-size: 19px; letter-spacing: -.015em; }
-.glance-card .what { font-size: 14.5px; color: var(--ink-soft); line-height: 1.45; flex: 1; }
+/* Bento: one glass tile per product, each with a live preview. */
+.bento { padding-bottom: clamp(56px, 9vh, 96px); scroll-margin-top: 80px; }
+.bento-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); grid-auto-rows: minmax(176px, auto); gap: 16px; margin: 0; padding: 0; list-style: none; }
+.bento-grid > li { min-width: 0; display: flex; }
+.b-u { grid-column: span 2; grid-row: span 2; }
+.b-poker { grid-column: span 2; }
+@media (max-width: 1040px) { .bento-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .b-u { grid-row: span 1; } }
+@media (max-width: 560px) { .bento-grid { grid-template-columns: 1fr; } .b-u, .b-poker { grid-column: span 1; } }
+.bento-tile { flex: 1; display: flex; flex-direction: column; gap: 14px; padding: 18px; border-radius: 24px; color: var(--ink); text-decoration: none; min-width: 0; position: relative; overflow: hidden;
+  transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease; }
+.bento-tile:hover { color: var(--ink); transform: translateY(-3px); border-color: var(--accent-line); }
+.bento-top { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.bento-ic { width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center; font-weight: 800; font-size: 19px; overflow: hidden; flex: none; }
+.bento-ic img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.bento-name { margin-top: auto; display: grid; gap: 2px; }
+.bento-name b { font-weight: 800; font-size: 21px; letter-spacing: -.02em; }
+.bento-name span { font-size: 14.5px; color: var(--ink-soft); line-height: 1.4; }
+.b-u .bento-name b { font-size: clamp(26px, 3vw, 36px); }
+.b-u .bento-name span { font-size: 17px; }
+.bento-letter { width: 100%; height: 100%; display: grid; place-items: center; background: var(--c6-fill); color: var(--c6-on); }
+.bv-shot { display: block; position: relative; border-radius: 14px; overflow: hidden; border: 1px solid color-mix(in srgb, var(--rule) 70%, transparent); background: var(--panel);
+  box-shadow: 0 14px 28px -20px rgba(0,0,0,.55); }
+.bv-shot img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: top left; }
+.bv-shot.desk { aspect-ratio: 16 / 9; }
+.bv-shot.phone { aspect-ratio: 3 / 4; max-width: 220px; }
+.b-u .bv-shot.phone { max-width: 260px; aspect-ratio: 4 / 5; }
+.b-zip .bv-shot.phone, .b-offer .bv-shot, .b-celaya .bv-shot { max-height: 120px; aspect-ratio: auto; height: 120px; }
+.b-zip .bv-shot.phone { max-width: none; }
+.b-agents .bv-shot { height: 120px; aspect-ratio: auto; }
+.b-poker .bento-tile { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 300px); grid-template-rows: auto 1fr; column-gap: 24px; }
+.b-poker .bento-top { grid-column: 1; }
+.b-poker .bento-name { grid-column: 1; grid-row: 2; align-self: end; }
+.b-poker .bv-shot { grid-column: 2; grid-row: 1 / span 2; align-self: center; }
+@media (max-width: 560px) { .b-poker .bento-tile { display: flex; } }
+/* Story screenshots. */
+.shot { margin: 0; border-radius: 18px; overflow: hidden; border: 1px solid color-mix(in srgb, var(--rule) 70%, transparent); background: var(--panel); box-shadow: var(--shadow-card); }
+.shot img { display: block; width: 100%; height: auto; }
+.shot.phone { max-width: 300px; margin: 0 auto; }
+.visual.shots-2 { display: grid; grid-template-columns: minmax(0, 1fr); gap: 14px; width: 100%; }
+.shot-icon { display: grid; place-items: center; padding: 24px; }
+.shot-icon img { width: 160px; max-width: 50vw; height: auto; border-radius: 22%; box-shadow: var(--shadow-card); }
+.side-ic img { display: block; border-radius: 9px; }
 .chip { display: inline-flex; align-items: center; gap: 6px; align-self: flex-start; padding: 4px 10px; border-radius: 999px; font-family: var(--f-mono); font-size: 11.5px;
   letter-spacing: .06em; text-transform: uppercase; background: var(--accent-soft); color: var(--accent); }
 .chip i { width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
@@ -275,7 +305,7 @@ h1, h2, h3 { font-family: var(--f-display); margin: 0; color: var(--ink); }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .reveal { opacity: 1; transform: none; transition: none; }
-  .sheet, .switch::after, .glance-card, .btn { transition: none; }
+  .sheet, .switch::after, .bento-tile, .btn { transition: none; }
 }
 
 /* Style switch (Guava | Normal) and the Light · Dark · System control. */
